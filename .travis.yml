@@ -1,3 +1,12 @@
-language: node_js
-node_js:
-  - "10"
+dist: trusty
+
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build -t node-ci-cd-example .
+      - docker push $DOCKER_USERNAME/cicd:node-ci-cd-example
+    # - stage: test
+    #   script: docker run --rm $DOCKER_USERNAME/node-ci-cd-example cat hello.txt
+    # - script: docker run --rm $DOCKER_USERNAME/node-ci-cd-example cat hello.txt
