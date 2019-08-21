@@ -1,6 +1,6 @@
 FROM node:latest
 
-COPY ./node_modules /node_modules
+RUN ["npm", "install"]
 COPY ./server.js /server.js
 
 ENV HOST=0.0.0.0
