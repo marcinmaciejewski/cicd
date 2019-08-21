@@ -6,6 +6,8 @@ jobs:
       script:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker build -t cicd .
+      - docker images
+      - docker tag cicd:latest marcinmaciejewski/cicd:latest
       - docker push $DOCKER_USERNAME/cicd:latest
     # - stage: test
     #   script: docker run --rm $DOCKER_USERNAME/node-ci-cd-example cat hello.txt
